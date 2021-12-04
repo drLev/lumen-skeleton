@@ -1,0 +1,53 @@
+{
+    "name": "drlev/olap",
+    "description": "The Olap cubes project based on Laravel Lumen Framework.",
+    "keywords": ["framework", "laravel", "lumen", "olap"],
+    "license": "MIT",
+    "type": "project",
+    "require": {
+        "php": "^8.0",
+        "laravel/lumen-framework": "^8.0"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.9.1",
+        "mockery/mockery": "^1.3.1",
+        "phpunit/phpunit": "^9.3",
+        "phpstan/phpstan": "^0.12.19",
+        "otis22/php-coverage-checker": "^1.2",
+        "symplify/easy-coding-standard": "^9.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/",
+            "Otis22\\PhpSkeleton\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "classmap": [
+            "tests/"
+        ],
+        "psr-4": {
+        }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "unit": "vendor/bin/phpunit",
+        "coverage": "vendor/bin/php-coverage-checker build/logs/clover.xml 100",
+        "static-analyze": "vendor/bin/phpstan analyse --level=max src tests",
+        "style": "vendor/bin/ecs check",
+        "style-fix": "vendor/bin/ecs check --fix",
+        "security": "./local-php-security-checker --path=./composer.lock",
+        "check-all": "composer validate && composer security && composer style && composer static-analyze && composer unit"
+    }
+}
